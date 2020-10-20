@@ -6,11 +6,7 @@ interface ComicsProps {
     comicConfig: comicListContext
 }
 
-interface ComicsState {
-    comics: any[]
-}
-
-class Comics extends React.Component<ComicsProps, ComicsState> {
+class Comics extends React.Component<ComicsProps, {}> {
     async componentDidMount() {
         try {
             const response = await fetch(`http://gateway.marvel.com/v1/public/comics?apikey=3cb62d086d5debdeea139095cbb07fe4&ts=redant&hash=140e85a50884cef76d614f6dacada288`);
@@ -26,18 +22,13 @@ class Comics extends React.Component<ComicsProps, ComicsState> {
     }
 
     render(): JSX.Element {
-        const props: comicListContext = this.props.comicConfig;
-        console.log(props.list);
-        console.log(props.favouritesList);
-
-        const getList = props.isFavouritesList ? props.favouritesList: props.list;
+        const getList = this.props.comicConfig.list;
     
         return <div className="Comic">
             {Object.keys(getList).length > 0 && Object.keys(getList).map(k =>{
                 const value = getList[parseInt(k)];
                 return <Comic 
                     key={value!.id} 
-                    id={value!.id}
                     title={value!.title} 
                     image={value!.thumbnail.path} 
                     itemValue={value}

@@ -3,14 +3,12 @@ import React from 'react';
 interface FavouriteComicProps {
     name: string,
     itemValue: any,
-    changeLists: any
+    changeLists: (item: any, favourite: boolean) => void
 }
 
-const FavouriteComic: React.FC<FavouriteComicProps> = ({name, itemValue, changeLists}) => {
-
-    const onClick = () => {
-        console.log('clicked',itemValue);
-        changeLists(itemValue);
+const FavouriteComic: React.FC<FavouriteComicProps> = ({name, itemValue, changeLists}): JSX.Element => {
+    const onClick = (): void => {
+        changeLists(itemValue, true);
     }
 
     return (
