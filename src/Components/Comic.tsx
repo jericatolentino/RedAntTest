@@ -1,19 +1,26 @@
 import React from 'react';
 
-interface ComicProps {
-    title: string,
-    thumbnail: string
+export interface ComicData {
+  id: number,
+  title: string,
+  thumbnail: { path: string }
 }
 
-interface ComicState { }
+export interface ComicProps {
+    title: string,
+    image: string
+}
+
+interface ComicState {}
 
 class Comic extends React.Component<ComicProps, ComicState> {
+  
   render(): JSX.Element {
-    const props = this.props;
+    const props: ComicProps = this.props;
     return <div className="Comic">
       <li className="comic-item">
         <div className="comic-card">
-          <img src={`${props.thumbnail}/portrait_uncanny.jpg`} />
+          <img src={`${props.image}/portrait_uncanny.jpg`} alt={props.title}/>
           <h2>{props.title}</h2>
           <button className="button js-add">Add to favourites</button>
         </div> {/*in favourites classname = js-remove*/}
