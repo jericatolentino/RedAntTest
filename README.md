@@ -1,44 +1,47 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# FrontEnd Exercise
+The objective is to create an app called 'Red Ant Comics'. This app will comprise of a listing page of comics with the ability to add comics to a favourites list.
 
-## Available Scripts
+You have an hour to complete this. We don't expect you to complete the exercise but we do expect you to have an understandable structure, clean code and mindful of others reviewing the code.
 
-In the project directory, you can run:
+There are no restrictions on which frameworks you use to create this app. Feel free to use any single page app framework(s) you feel most comfortable with.
 
-### `npm start`
+The HTML and CSS has been provided for you. For the comic and favourites listings the list item templates are within HTML comments.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![Red Ant Comics](screenshot.jpg)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+You will be evaluated on your ability to integrate with a RESTful JSON API including connections/error handling and your ability to structure the app appropriately.
 
-### `npm test`
+The data will be provided by the Marvel API.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technical details
 
-### `npm run build`
+### Getting started
+* Clone this project
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### API
+You will need to use the following url to request the comics endpoint from the Marvel API:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+[https://gateway.marvel.com/v1/public/comics?apikey=3cb62d086d5debdeea139095cbb07fe4&ts=redant&hash=140e85a50884cef76d614f6dacada288](https://gateway.marvel.com/v1/public/comics?apikey=3cb62d086d5debdeea139095cbb07fe4&ts=redant&hash=140e85a50884cef76d614f6dacada288)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Additional details
 
-### `npm run eject`
+- **Documentation:** [http://developer.marvel.com/documentation/generalinfo](http://developer.marvel.com/documentation/generalinfo)
+- **List of end points:** [http://developer.marvel.com/docs](http://developer.marvel.com/docs)
+- **Image formats** [http://developer.marvel.com/documentation/images](http://developer.marvel.com/documentation/images)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Images
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The API will provide part of the image url and the extension. To get the full valid URL you will need to select an image size and append into the URL (sizes are show within the Image formats link above). For example the following link is using 'portrait_uncanny' image size.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+http://i.annihil.us/u/prod/marvel/i/mg/3/40/4bb4680432f73/portrait_uncanny.jpg
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Favourites
 
-## Learn More
+To open the favourites panel (```#favourites-panel```) you need to add a class of ```open```. Toggling this class will show/hide the panel.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* Each comic within the list should have a button to add to the list
+* If the comic is already in the list the add button should be changed so you can remove it
+* There should be a list that displays all the favourites
+* The comics within the favourites list should have a button to remove
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Have fun!**
