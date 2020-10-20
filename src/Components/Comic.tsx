@@ -7,14 +7,21 @@ export interface ComicData {
 }
 
 export interface ComicProps {
-    title: string,
-    image: string
+  id: number,
+  title: string,
+  image: string,
+  itemValue: any,
+  changeLists: (item: any) => {}
 }
 
 interface ComicState {}
 
 class Comic extends React.Component<ComicProps, ComicState> {
   
+  onClick = () => {
+    this.props.changeLists(this.props.itemValue);
+  }
+
   render(): JSX.Element {
     const props: ComicProps = this.props;
     return <div className="Comic">
@@ -22,8 +29,8 @@ class Comic extends React.Component<ComicProps, ComicState> {
         <div className="comic-card">
           <img src={`${props.image}/portrait_uncanny.jpg`} alt={props.title}/>
           <h2>{props.title}</h2>
-          <button className="button js-add">Add to favourites</button>
-        </div> {/*in favourites classname = js-remove*/}
+          <button className="button js-add" onClick={this.onClick}>Add to favourites</button>
+        </div>
       </li>
     </div>
   };

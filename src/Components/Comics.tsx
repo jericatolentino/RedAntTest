@@ -12,23 +12,39 @@ interface ComicsState {
 
 class Comics extends React.Component<ComicsProps, ComicsState> {
     async componentDidMount() {
-        const response = await fetch(`http://gateway.marvel.com/v1/public/comics?apikey=3cb62d086d5debdeea139095cbb07fe4&ts=redant&hash=140e85a50884cef76d614f6dacada288`);
-        const json = await response.json();
-        this.props.comicConfig.setList(json.data.results)
-    } //need to do error handling
-
+        try {
+            const response = await fetch(`http://gateway.marvel.com/v1/public/comics?apikey=3cb62d086d5debdeea139095cbb07fe4&ts=redant&hash=140e85a50884cef76d614f6dacada288`);
+            const json = await response.json();
+            let comicMap: any = {};
+            (json.data.results).forEach((comic: { id: React.Key; }) => {
+                comicMap[comic.id] = comic;
+            });
+            this.props.comicConfig.setList(comicMap);
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
     render(): JSX.Element {
         const props: comicListContext = this.props.comicConfig;
-        console.log(props)
-        console.log('LOOK HERE', !props.isFavouritesList ? 'NOT FAV' : 'FAV');
+        console.log(props.list);
+        console.log(props.favouritesList);
 
-        const getList = !props.isFavouritesList ? props.list : props.favouritesList;
-
+        const getList = props.isFavouritesList ? props.favouritesList: props.list;
+    
         return <div className="Comic">
-            {getList.length > 0 && getList.map(comic =>
-                <Comic key={comic.id} title={comic.title} image={comic.thumbnail.path} />
-            )} {/*comic.thumbnail.path*/}
+            {Object.keys(getList).length > 0 && Object.keys(getList).map(k =>{
+                const value = getList[parseInt(k)];
+                return <Comic 
+                    key={value!.id} 
+                    id={value!.id}
+                    title={value!.title} 
+                    image={value!.thumbnail.path} 
+                    itemValue={value}
+                    changeLists={this.props.comicConfig.changeLists}
+                />
+               
+            })}
         </div>
     };
 }
